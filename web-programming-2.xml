@@ -1,0 +1,1823 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="moodle-player/moodle-player.xslt"?>
+<html lang="en">
+    <head>
+        <title>Web Programming 2</title>
+        <meta name="moodle-player-folder" content="moodle-player"></meta>
+        <meta name="moodle-player-course-id" content="118"></meta>
+        <meta name="moodle-player-code-style" content="ir-black"></meta>
+    </head>
+    <body>
+        <section>
+            <h1>Introduction</h1>
+            <article>
+                <h2>JavaScript</h2>
+                <p>JavaScript is a multi-paradigm programming language supporting functional and object oriented programming styles, created by the <a href="https://en.wikipedia.org/wiki/Netscape">Netscape Communications Corporation</a>.</p>
+              
+                <p>Created in 1995 by <a href="https://en.wikipedia.org/wiki/Ecma_International">Brendan Eich</a>.</p>
+              
+                <p>In 1996, the language is submitted to <a href="https://en.wikipedia.org/wiki/Ecma_International">Ecma International (European Computer Manufacturers Association)</a> for standardization.</p>
+              
+                <p>In 1997, the first version of <a href="https://en.wikipedia.org/wiki/ECMAScript">ECMAScript</a> is released.</p>
+              
+                <ul>
+                    <li>2009: ECMAScript Edition 5 (ES5)</li>
+                    <li>2015: ECMAScript Edition 6 (ES6) also called ES2015</li>
+                    <li>2016: ECMAScript Edition 7 (ES7) also called ES2016</li>
+                    <li>2017: ECMAScript Edition 8 (ES8)</li>
+                    <li>2018: ECMAScript Edition 9 (ES9)</li>
+                    <li>ESnext: In development</li>
+                </ul>
+                <p>
+                   In 1996, Microsoft implemented the JavaScript's new specs under the name
+                   <a href="https://en.wikipedia.org/wiki/JScript">JScript</a>
+                   for their Internet Explorer browser.
+                </p>
+                <p>JavaScript is designed, at its core, to increase the interactive possibilities of static HTML documents.</p>
+                <p>JavaScript has been heavily criticized for how permissive the language is.</p>
+                <ul>
+                    <li>Multiple ways of achieving the same end.</li>
+                    <li>Incompatibility between implementations of the specification (JScript vs JavaScript).</li>
+                    <li>No static data types (compared to Java for example).</li>
+                    <li>
+                      Allows for valid syntax that can <a href="https://i.redd.it/h7nt4keyd7oy.jpg" target="_blank">lead to confusion or cause bugs</a>.
+                    </li>
+                </ul>
+                <pre>
+                    <code class="javascript" data-title="Example of a bug caused by JavaScript being a weakly typed language. ">
+                        <![CDATA[
+                            function formatUserProfile (name, age) {
+                                return name + ' is the age: ' + age + ' years.'
+                            }
+
+                            formatUserProfile('Martin', 45)
+
+                            // Martin is the age: 45 years.
+
+                            formatUserProfile(45, 'Martin')
+
+                            // 45 is the age: Martin years.
+                        ]]>
+                    </code>
+                </pre>
+            </article>
+            <article>
+                <h2>JavaScript Engine</h2>
+                <p>
+                  There are several <a href="https://en.wikipedia.org/wiki/List_of_ECMAScript_engines"> JavaScript engines </a> that allow for JavaScript code to be interpreted.
+                </p>
+                <p>
+                  The <a href="https://en.wikipedia.org/wiki/Chrome_V8">V8</a> engine produced by The Chromium Project in September 2008 for the Chrome browser is the most used.
+                </p>
+                <p>V8 is now used in several tools</p>
+                <ul>
+                    <li>Google Chrome</li>
+                    <li>Chromium</li>
+                    <li>
+                        <a href="https://info.couchbase.com/couchbase_server.html">Couchbase</a>
+                    </li>
+                    <li>
+                        <a href="https://www.mongodb.com/">MongoDB</a>
+                    </li>
+                    <li>
+                        <a href="https://nodejs.org/en/">Node.js</a>
+                    </li>
+                    <li>
+                        <a href="https://electronjs.org/">Electron</a>
+                    </li>
+                </ul>
+            
+            </article>
+            <article>
+                <h2>Context of use</h2>
+                <p>JavaScript is now used at all levels of client-server architecture.</p>
+            </article>
+            <article>
+                <h3>Client - Web Browser</h3>
+                <p>
+                    JavaScript is <a href="https://w3techs.com/technologies/details/cp-javascript/all/all">used on most websites</a> today.
+                </p>
+                <p>Integration into an HTML file can be achieved in 2 different ways.</p>
+                <pre>
+                    <code class="HTML" data-title="use.html" data-subtitle="Use with the script tag.">
+                        <![CDATA[
+                            <!DOCTYPE html>
+                            <html lang="en">
+
+                            <head>
+                                <meta charset="UTF-8">
+                                <title>Use</title>
+
+                                <script>
+                                    alert('Running in the HTML head tag')
+                                </script>
+
+                                <script src="use.js"></script>
+                            </head>
+
+                            <body>
+                                <script>
+                                    alert('Running in the body HTML tag')
+                                </script>
+                            </body>
+
+                            </html>
+                        ]]>
+                    </code>
+                </pre>
+                <pre>
+                    <code class="javascript" data-title="use.js">
+                        <![CDATA[
+                            'use strict'
+
+                            alert('Running from an external script')
+                        ]]>
+                    </code>
+                </pre>
+                <p>
+                  The first line <code>'use strict'</code> activates the <a href="https://javascript.info/strict-mode">browser's modern execution mode</a> (from ECMAScript version 5 onwards).
+                </p>
+                <p>
+                  Several risky uses of JavaScript now produce errors with the use of <a href="https://www.w3schools.com/js/js_strict.asp"><code>'use strict'</code></a>
+                </p>
+                <pre>
+                    <code class="javascript" data-title="use.js">
+                        <![CDATA[
+                            'use strict'
+
+                            // In development: 'test' is not defined. eslint (no-undef)
+                            test = 'hello'
+
+                            // At runtime : ReferenceError : test is not defined
+                            console.log(test)
+                        ]]>
+                    </code>
+                </pre>
+            </article>
+            <article>
+                <h3>Server - Node.js</h3>
+                <p>
+                  <a href="https://nodejs.org/en/">Node.js</a> is the most popular server and there are <a href="http://webagility.com/posts/5-alternatives-to-nodejs-for-java">several alternatives for running JavaScript on a server</a>.
+                </p>
+                <p>
+                  Note: since Java 11, the <a href="http://openjdk.java.net/jeps/335">Nashorn engine is now depreciated</a>.
+                </p>
+                <ul>
+                    <li>
+                      Accommodation (Server
+                      <a href="https://expressjs.com/">express</a>
+                        ).
+                    </li>
+                    <li>Microservice.</li>
+                    <li>Command line tool.</li>
+                </ul>
+            </article>
+            <article>
+                <h2>Installation</h2>
+              <p>
+                It is <strong>strongly</strong> recommended that all tools be installed in English.
+              </p>
+                <blockquote class="blockquote">
+                    <p>All code in any code-base should look like a single person typed it, no matter how many people contributed.</p>
+                    <footer class="blockquote-footer">
+                        <cite title="Source Title">Rick Waldron</cite>
+                    </footer>
+                </blockquote>
+                <ul>
+                    <li>
+                        <a href="https://nodejs.org/en/">Node.js</a>
+                        <ul>
+                            <li>
+                                Test the node installation:
+                                <kbd>node -v</kbd>
+                            </li>
+                            <li>
+                              Test the npm installation:
+                              <kbd>npm -v</kbd>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="https://code.visualstudio.com/">Visual Studio Code</a>
+                        <ul>
+                            <li>
+                                Create the directory:
+                                <strong>D:\vsc-workspace</strong>
+                            </li>
+                            <li>File -&gt; Open folder... and select the directory vsc-workspace</li>
+                            <li>
+                                Install the following extensions:
+                                <ul>
+                                    <li>ESLint (Dirk Baeumer)</li>
+                                    <li>W3C Validation (Umoxfo)</li>
+                                    <li>EditorConfig for VS Code</li>
+                                </ul>
+                            </li>
+                            <li>
+                                Optional extensions:
+                                <ul>
+                                    <li>Code Runner (Jun Han)</li>
+                                    <li>open in browser (TechER)</li>
+                                </ul>
+                            </li>
+                            <li>
+                                File -&gt; Preferences -&gt; Settings and add the following configurations:
+                                <pre>
+                                    <code class="javascript" data-title="settings.json">
+                                        <![CDATA[
+                                        "editor.formatOnSave": true,
+                                        "eslint.autoFixOnSave": true,
+                                        "javascript.format.enable": false
+                                    ]]>
+                                    </code>
+                                </pre>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>Initialize and configure your project</p>
+                <ul>
+                    <li>Terminal -&gt; New Terminal</li>
+                    <li>
+                        Execute the command:
+                        <kbd>npm init</kbd>
+                        and use the
+                        <kbd>Enter</kbd>
+                        key to choose the default values.
+                    </li>
+                    <li>
+                        Execute the command:
+                        <kbd>npm install --save-dev eslint eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard eslint-config-standard</kbd>
+                    </li>
+                </ul>
+                <p>Add the following file to the root to configure ESLint. </p>
+                <pre>
+                    <code class="javascript" data-title=".eslintrc.json">
+                        <![CDATA[
+                            {
+                                "extends": "standard",
+                                "rules": {
+                                    "indent": [
+                                        "error",
+                                        4
+                                    ]
+                                },
+                                "overrides": [
+                                    {
+                                        "files": [
+                                            "**/*.js"
+                                        ]
+                                    }
+                                ],
+                                "env": {
+                                    "browser": true,
+                                    "node": true,
+                                    "es6": true,
+                                    "jquery": true
+                                }
+                            }
+                        ]]>
+                    </code>
+                </pre>
+                <p>Add the following file to the root to set the general configuration of your editor.</p>
+                <pre>
+                    <code class="shell" data-title=".editorconfig">
+                        <![CDATA[
+                            # indicate this is the root of the project
+                            root = true
+
+                            [*]
+                            indent_style = space
+                            end_of_line = lf
+                            charset = utf-8
+                            trim_trailing_whitespace = true
+                            indent_size = 4
+                        ]]>
+                    </code>
+                </pre>
+            </article>
+        </section>
+        <section>
+            <h1>Language</h1>
+            <article>
+                <h2>Syntax</h2>
+                <pre>
+                    <code class="javascript" data-title="Example script with JavaScript">
+                        <![CDATA[
+                            function formatUserProfile (name, age) {
+                                return name + ' is the age: ' + age + ' years.'
+                            }
+
+                            const profile = formatUserProfile('Martin', 45)
+
+                            console.log(profile);
+                        ]]>
+                    </code>
+                </pre>3 possible ways to declare a variable
+                <p>The semicolon is necessary only if several instructions are on the same line.</p>
+                <p>The language is Case Sensitive</p>
+                <p>
+                  <code>console.log()</code> is one of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console">debugging methods</a>.
+                </p>
+                <pre>
+                    <code class="javascript" data-title="Two ways to add comments to your code.">
+                        <![CDATA[
+                            // A comment on a single line
+
+                            /**
+                            * A comment on several lines
+                            * The http://usejsdoc.org/ standard produces documentation comparable to JavaDoc
+                            */
+                        ]]>
+                    </code>
+                </pre>
+            </article>
+            <article>
+                <h2>Variable</h2>
+                <p>Container in which we can classify information.</p>
+                <p>Each variable must have a name that follows the following rules:</p>
+                <ul>
+                    <li>
+                      Must contain only <em>letters</em>, <em>numbers</em>, or the characters <em>$</em> and <em>_</em>.
+                    </li>
+                    <li>
+                      The first character must <em>not</em> be a number.
+                    </li>
+                    <li>
+                      Must <em>not</em> be a <a href="http://www.javascripter.net/faq/reserved.htm">JavaScript reserved word</a>.
+                    </li>
+                </ul>
+                <p>
+                  Note: Even if the accented characters are valid, it is obvious that this is not a good choice. (<a href="https://mothereff.in/js-variables">JavaScript variable name validator</a>)
+                </p>
+            </article>
+            <article>
+                <h3>Declaration</h3>
+                <pre>
+                    <code class="javascript" data-title="3 possible ways to declare a variable">
+                        <![CDATA[
+                            // Declare a variable that can be reassigned
+                            let pageNumber = 1234
+
+                            // Declares a variable that can not be reassigned
+                            const userName = "mvachon"
+
+                            // Declare a constant that can not be reassigned
+                            const PI = 3.1416
+
+                            // Deprecated way that is useful only for supportting outdated browsers.
+                            var userId = 23
+                        ]]>
+                    </code>
+                </pre>
+                <p>
+                  For <code>const</code> and <code>let</code> the scope of the declaration is limited to the block of code (block-scoped).
+                </p>
+                <p>
+                   For <code>var</code> the scope of the declaration is limited to the nearest function.
+                </p>
+            </article>
+
+            <article>
+                <h3>Naming</h3>
+                <p>There are very specific conventions for naming everything that exists in programming.</p>
+                <p><a href="https://medium.com/@pddivine/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841">Case Styles: Camel, Pascal, Snake, and Kebab Case</a></p>
+                <pre>
+                    <code class="javascript" data-title="Example for JavaScript naming.">
+                        <![CDATA[
+                            const FULL_NAME_LENGTH = 10
+
+                            function formatFullName (firstName, lastName) {
+                                const fullName = firstName + ' ' + lastName
+
+                                let result = ''
+
+                                if (fullName.length > FULL_NAME_LENGTH) {
+                                    result = fullName.substr(0, FULL_NAME_LENGTH)
+                                } else {
+                                    result = fullName.padEnd(FULL_NAME_LENGTH, ' ')
+                                }
+
+                                return result
+                            }
+                        ]]>
+                    </code>
+                </pre>
+
+                <p>Example naming convention for CSS:</p>
+                <ul>
+                    <li><a href="http://getbem.com/introduction/">Blocks, Elements and Modifiers</a></li>
+                    <li><a href="https://google.github.io/styleguide/htmlcssguide.html#ID_and_Class_Name_Delimiters">google.github.io</a></li>
+                </ul>
+
+                <pre>
+                    <code class="css" data-title="Example syntax for CSS naming. ">
+                        <![CDATA[
+                            .user-name {
+                                font-weight: 10em;
+                            }
+
+                            #main_nav {
+                                font-weight: 12em;
+                            }
+                        ]]>
+                    </code>
+                </pre>
+            </article>
+
+            <article>
+                <h3>Data Types</h3>
+                <p>The type of the variable is determined when assigning a value.</p>
+                <p>
+                  The type can change if the variable is reassigned. (
+                  <a href="https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing">dynamic typing</a>
+                    )
+                </p>
+                <p>
+                    <a href="https://javascript.info/types">7 types of data are possible</a>
+                </p>
+                <table>
+                    <tr>
+                        <th>Data type</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <th>string</th>
+                        <td>array of characters</td>
+                    </tr>
+                    <tr>
+                        <th>number</th>
+                        <td>Whole number or decimal</td>
+                    </tr>
+                    <tr>
+                        <th>boolean</th>
+                        <td>
+                            Contains only the values:
+                            <em>true</em>
+                            or
+                            <em>false</em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>null</th>
+                        <td>Initialized without value.</td>
+                    </tr>
+                    <tr>
+                        <th>undefined</th>
+                        <td>Not initialized.</td>
+                    </tr>
+                    <tr>
+                        <th>object</th>
+                        <td>Complex data structure.</td>
+                    </tr>
+                    <tr>
+                        <th>symbol</th>
+                        <td>
+                            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol">Unique identifier creation to avoid conflicts.</a>
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                  The type of a variable can be obtained with the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof"> <code>typeof</code> </a> operator.
+                </p>
+                <p>
+                  <em>string, number, boolean, null, undefined</em>
+                  are primitives and will always be passed by value, never by reference.
+                </p>
+            </article>
+            <article>
+                <h2>Operator</h2>
+                <p>
+                  JavaScript has many <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators">operators</a>.
+                </p>
+                <p>
+                  <a href="https://www.tutorialspoint.com/javascript/javascript_operators.htm">The most important operators for this course</a> are as follows:
+                </p>
+                <ul>
+                    <li>Assignment</li>
+                    <li>Arithmetic</li>
+                    <li>Comparison</li>
+                    <li>Logical</li>
+                    <li>
+                        Ternary
+                        <code>( ? : )</code>
+                    </li>
+                    <li>
+                        Unary
+                        <code>typeof</code>
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h2>Control Flow</h2>
+                <p>
+                  JavaScript has many <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements">control flow instructions.</a>
+                </p>
+                <p>The most important control flow instructions for this course are as follows:</p>
+                <ul>
+                    <li>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else">
+                            <code>if else</code>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch">
+                            <code>switch</code>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/while">
+                            <code>while</code>
+                        </a>
+                        and
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/do...while">
+                            <code>do while</code>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for">
+                            <code>for</code>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/break">
+                            <code>break</code>
+                        </a>
+                        and
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/continue">
+                            <code>continue</code>
+                        </a>
+                    </li>
+                </ul>
+            </article>
+        </section>
+        <section>
+            <h1>Functions</h1>
+            <article>
+                <h2>Predefined Functions</h2>
+                <p>
+                  <a href="https://www.w3schools.com/jsref/jsref_obj_global.asp">List of JavaScript's predefined functions.</a>
+                </p>
+            </article>
+            <article>
+                <h3>Predefined functions provided by the Window object (DOM).</h3>
+                <p>
+                  The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window"><code>Window</code></a> object is available when the code is run by the browser.
+                </p>
+            </article>
+            <article>
+                <h3>Predefined functions provided by the NodeJs global object.</h3>
+                <p>
+                    The 
+                    <a href="https://nodejs.org/api/globals.html">
+                        <code>global</code>
+                    </a> object is available once the code is executed by the NodeJs server.
+                </p>
+            </article>
+            <article>
+                <h2>Function Declaration</h2>
+                <p>It is also possible to define our own functions.</p>
+                <pre>
+                    <code class="javascript" data-title="Function declaration">
+                        <![CDATA[
+                            function addFunction(a, b) {
+                                return a + b;
+                            }
+
+                            // Returns 6
+                            console.log(addFunction(2, 4));
+                        ]]>
+                    </code>
+                </pre>
+                <pre>
+                    <code class="javascript" data-title="Function expressions">
+                        <![CDATA[
+                            const addExpression = function(a, b) {
+                                return a + b;
+                            };
+
+                            // Returns 6
+                            console.log(addExpression(2, 4));
+
+
+                            function executeOperation(operation, a, b) {
+                                return operation(a, b);
+                            }
+
+                            // Returns 6
+                            console.log(executeOperation(addExpression, 2, 4));
+
+
+                            // The expression of an an Anonymous function
+                            // Returns 6
+                            console.log(
+                                executeOperation(
+                                    function(a, b) {
+                                        return a + b;
+                                    },
+                                    2,
+                                    4
+                                )
+                            );
+                        ]]>
+                    </code>
+                </pre>
+            </article>
+            <article>
+                <h2>Nested Functions</h2>
+                <p>A function can be declared inside another function.</p>
+                <p>The nested function represents the closure of the function in which it was called.</p>
+                <pre>
+                    <code class="javascript" data-title="Variabel scope with a nested function.">
+                        <![CDATA[
+                            const part1 = "Example for demonstration";
+
+                            function exemple(a) {
+                                const part2 = "the scope of variables ";
+                                const part3 = "in ";
+
+                                function nestedExample() {
+                                    const part4 = "a ";
+                                    return part3 + part4 + "function " + a;
+                                }
+
+                                return part1 + part2 + nestedExample();
+                            }
+
+                            // Example to show the scope of variables in a nested function
+                            console.log(exemple("imbriquée"));
+                        ]]>
+                    </code>
+                </pre>
+            </article>
+        </section>
+        <section>
+            <h1>Global Objects</h1>
+            <p>
+              List of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects">Global Objects</a> gobally available.
+            </p>
+          <p>The most important Global Objects for this course are as follows:</p>
+            <article>
+                <h2>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">
+                        <code>String</code>
+                    </a>
+                </h2>
+                <p>Concatenation (different syntaxes: + and \)</p>
+                <p>Comparison (operators)</p>
+                <p>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness">Equality</a>
+                </p>
+                <pre>
+                    <code class="javascript" data-title="Equality of strings of characters.">
+                        <![CDATA[
+                            const testA = 666
+                            const testB = '666'
+
+                            // Expected '===' and instead saw '=='.eslint(eqeqeq)
+                            console.log('Value test only:', testA == testB)
+
+                            console.log('Value and type test:', testA === testB)
+                        ]]>
+                    </code>
+                </pre>
+            </article>
+            <article>
+                <h2>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">
+                        <code>Number</code>
+                    </a>
+                </h2>
+                <p>A Number object is created using the Number() constructor. A primitive type object number is created using the Number() function.</p>
+                <p>
+                    Returns the global
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN">NaN</a>
+                    property when the value is Not-A-Number.
+                </p>
+                <p>
+                  Two isNan() functions exits: 
+                  The global function <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN"><code>isNaN()</code></a>
+                  and the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN">Number.isNaN()</a> of the
+                  <em>Number</em> object.
+                </p>
+                <p>
+                    <a href="https://ponyfoo.com/articles/es6-number-improvements-in-depth">ES6 Number Improvements in Depth</a>
+                </p>
+            </article>
+            <article>
+                <h2>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">
+                        <code>Date</code>
+                    </a>
+                </h2>
+                <p>The <em>Data</em> object does not behave like a string of characters.</p>
+                <p>
+                  For complex calculations always use a library, such as:
+                  <a href="https://momentjs.com/">momentjs</a>
+                </p>
+                <p>
+                    <a href="https://en.wikipedia.org/wiki/Greenwich_Mean_Time">
+                        <strong>GMT</strong>
+                    </a>
+                    Greenwich Mean Time
+                </p>
+                <p>
+                    <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">
+                        <strong>UTC</strong>
+                    </a>
+                    Coordinated Universal Time
+                </p>
+            </article>
+            <article>
+                <h2>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math">
+                        <code>Math</code>
+                    </a>
+                </h2>
+                <p>Different implementations of the JavaScript interpreter can produce results with varying accuracy. </p>
+            </article>
+            <article>
+                <h2>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">
+                        <code>Array</code>
+                    </a>
+                </h2>
+                <p>Always use the literal syntax for initializing an array.</p>
+                <pre>
+                    <code class="javascript" data-title="Declaring and Initializing an Array">
+                        <![CDATA[
+                            // The array literal notation [] is preferable.eslint(no-array-constructor)
+                            const testA = new Array()
+
+                            // Declaring an emtpy array with the literal sytax as follows
+                            const testB = []
+
+                            testB[0] = 'a'
+                            testB[1] = 'b'
+                            // Warning: the indexing is not continuous, so there can be empty array elements
+                            testB[4] = 'c'
+
+                            // [ 'a', 'b', <2 empty items>, 'c' ]
+                            console.log(testB)
+
+                            // Declaration of an initilazed array with 2 elements
+                            const testC = ['a', 'b']
+
+                            // [ 'a', 'b' ]
+                            console.log(testC)
+                        ]]>
+                    </code>
+                </pre>
+            </article>
+        </section>
+        <section>
+            <h1>DOM</h1>
+            <p>HTML tags group content and have attributes that configure the tag's behavior.</p>
+            <p>Adding interactivity between HTML and JavaScript requires the use of a DOM to represent the structure of the webpage.</p>
+            <p>The <em>Document Object Model</em> (DOM) is a data structure representing the HTML structure. </p>
+            <article>
+                <h2>Architecture</h2>
+                <p>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model">DOM API</a>
+                </p>
+                <map name="image1_1">
+                    <area shape="rect" coords="473,435,638,475" alt="" onmouseover="showTooltip('n10')" onmouseout="hideTooltip()" />
+                    <area shape="rect" coords="473,365,638,405" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement" alt="" onmouseover="showTooltip('n9')" onmouseout="hideTooltip()" target="_blank" />
+                    <area shape="rect" coords="473,505,657,545" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement" alt="" onmouseover="showTooltip('n8')" onmouseout="hideTooltip()" target="_blank" />
+                    <area shape="rect" coords="609,575,793,615" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement" alt="" onmouseover="showTooltip('n7')" onmouseout="hideTooltip()" target="_blank" />
+                    <area shape="rect" coords="336,225,525,265" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLHeadElement" alt="" onmouseover="showTooltip('n6')" onmouseout="hideTooltip()" target="_blank" />
+                    <area shape="rect" coords="891,295,1026,335" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement" alt="" onmouseover="showTooltip('n5')" onmouseout="hideTooltip()" target="_blank" />
+                    <area shape="rect" coords="336,295,525,335" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement" alt="" onmouseover="showTooltip('n4')" onmouseout="hideTooltip()" target="_blank" />
+                    <area shape="rect" coords="217,155,373,195" alt="" onmouseover="showTooltip('n3')" onmouseout="hideTooltip()" />
+                    <area shape="rect" coords="15,155,161,195" alt="" onmouseover="showTooltip('n2')" onmouseout="hideTooltip()" />
+                    <area shape="rect" coords="135,85,235,125" href="https://developer.mozilla.org/en-US/docs/Web/API/Document" alt="" onmouseover="showTooltip('n1')" onmouseout="hideTooltip()" target="_blank" />
+                    <area shape="rect" coords="48,15,128,55" href="https://developer.mozilla.org/en-US/docs/Web/API/Window" alt="" onmouseover="showTooltip('n0')" onmouseout="hideTooltip()" target="_blank" />
+                </map>
+                <img data-title="Document Object Model" data-subtitle="An HTML document is tree that can be traversed in every way." class="yimage" src="asset/dom/dom1_1.png" usemap="#image1_1" border="0" alt="" />
+            </article>
+            <article>
+                <h2>
+                    <a href="https://javascript.info/dom-navigation">Navigation</a>
+                </h2>
+                <p>
+                  The DOM is a tree structure consisting of implementation of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node">Node</a> interface
+                </p>
+                <p>This implementation provides a universal method for tree navigation.</p>
+                <p>
+                  Each node thus has several properties, like nodeType
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType">
+                        <code>nodeType</code>.
+                    </a>
+                </p>
+                <map name="image_node">
+                    <area shape="rect" coords="15,99,138,139" href="https://developer.mozilla.org/en-US/docs/Web/API/Document" alt="" onmouseover="showTooltip('n3')" onmouseout="hideTooltip()" target="_blank" />
+                    <area shape="rect" coords="159,183,282,223" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement" alt="" onmouseover="showTooltip('n2')" onmouseout="hideTooltip()" target="_blank" />
+                    <area shape="rect" coords="181,99,261,139" href="https://developer.mozilla.org/en-US/docs/Web/API/Element" alt="" onmouseover="showTooltip('n1')" onmouseout="hideTooltip()" target="_blank" />
+                    <area shape="rect" coords="119,15,199,55" href="https://developer.mozilla.org/en-US/docs/Web/API/Node" alt="" onmouseover="showTooltip('n0')" onmouseout="hideTooltip()" target="_blank" />
+                </map>
+                <img data-title="Base Interfaces" class="yimage" src="asset/node/node1_1.png" usemap="#image_node" border="0" alt="" />
+                <p>
+                  The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document"><code>Document</code></a> and each <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element"><code>Element</code></a> has methods like the following:</p>
+                <ul>
+                    <li>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector">
+                            <code>querySelector()</code>
+                        </a>
+                      Returns the first element corresponding to the specified selector.
+                    </li>
+                    <li>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll">
+                            <code>querySelectorAll()</code>
+                        </a>
+                      Returns the list of elements corresponding to the specified selector.
+                    </li>
+                </ul>
+                <p>
+                    The
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById">
+                        <code>Document.getElementById()</code>
+                    </a>
+                    method is only available on the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document">Document</a> object since the ID must be unique for each document.
+                </p>
+                <pre>
+                    <code class="html" data-title="Managing Text type Node Objects">
+                        <![CDATA[
+                            <div id="container">
+                                <div>a</div>
+                                <div>b</div>
+                            </div>
+
+                            <script>
+                                const containerElement = document.getElementById('container')
+                                console.log(containerElement.childNodes.length)
+                            </script>
+                        ]]>
+                    </code>
+                </pre>
+                <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes"><code>childNodes</code></a>
+                is a collection of <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node"><code>Node objects</code></a> 
+                and <a href="https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/children"><code>children</code></a> 
+                is a collection of <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">
+                <code>Element objects</code></a>.
+              </p>
+              <img src="asset/text-node.png" alt="text-node" data-title="Representation of Text Nodes in an HTML or XML Structure" />
+            </article>
+        </section>
+        <section>
+            <h1>Events</h1>
+            <p>
+              Actions performed by the browser or user interactions trigger 
+              <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">events</a>
+                .
+            </p>
+            <p>Events can be "listened" to with JavaScript to react to desired actions.</p>
+            <p>
+              <a href="https://developer.mozilla.org/en-US/docs/Web/Events#Standard_events">The list of possible events with DOM.</a>
+            </p>
+            <article>
+                <h2>HTML Attribute</h2>
+                <p>
+                  HTML tags have  <a href="https://www.w3schools.com/tags/ref_eventattributes.asp">attributes for the event declaration</a>.
+                </p>
+                <div class="row">
+                    <div class="col">
+                        <pre>
+                            <code class="html" data-title="Example of an event declared with HTML attributes">
+                                <![CDATA[
+                                    <button onclick="alert('onclick event')">onclick event test</button>
+
+                                    <div onmouseover="console.log(new Date(), 'onmouseover event')">A paragraph with a mouseover event</div>
+                                ]]>
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <div>
+                                    <button onclick="alert('onclick event')">onclick event test</button>
+                                </div>
+                                <div style="padding-top: 20px;" onmouseover="console.log(new Date(), 'onmouseover event')">A paragraph with a mouseover event</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <h2>EventTarget</h2>
+                <p>
+                  The <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget">EventTarget</a> interface is the foundation of the DOM architecture.
+                </p>
+                <p>
+                  EventTarget offers methods for adding an event listener, removing an event listener and launching events:
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">
+                        <code>EventTarget.addEventListener()</code>
+                    </a>
+                    <a href="https://developer.mozilla.org/en/docs/Web/API/EventTarget/removeEventListener">
+                        <code>EventTarget.removeEventListener()</code>
+                    </a>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent">
+                        <code>EventTarget.dispatchEvent()</code>
+                    </a>
+                </p>
+                <pre>
+                    <code class="javascript" data-title="Example of adding an event listener.">
+                        <![CDATA[
+                            // Add an event lisener to the whole document.
+                            document.addEventListener('click', onClickEventHandler)
+
+                            function onClickEventHandler () {
+                                alert('onclick event on whole document')
+                            }
+                        ]]>
+                    </code>
+                </pre>
+                <pre>
+                    <code class="javascript" data-title="Adding an event listener to an element.">
+                        <![CDATA[
+                            // Select a since element p
+                            const pElement = document.getElementsByTagName('p')[0]
+
+                            // Add an event listener to the element p
+                            pElement.addEventListener('mouseover', onMouseOverEventHandler)
+
+                            function onMouseOverEventHandler () {
+                                alert('onclick event on the p element')
+                            }
+                        ]]>
+                    </code>
+                </pre>
+
+                <p>The scope and parameters are received by the event handler.</p>
+                <pre>
+                    <code class="javascript" data-title="Example of default parameter">
+                        <![CDATA[
+                            document.addEventListener('click', onClickEventHandler)
+
+                            function onClickEventHandler (event) {
+                                console.log('Click on the document', this, event)
+                            }
+                        ]]>
+                    </code>
+                </pre>
+
+                <pre>
+                    <code class="javascript" data-title="Example of additional parameters">
+                        <![CDATA[
+                            document.addEventListener('click', function (event) {
+                                onClickWithParamEventHandler(event, 'launch')
+                            })
+
+                            function onClickWithParamEventHandler (event, param) {
+                                console.log('Click on the document with parameter:', param, this, event)
+                            }
+                        ]]>
+                    </code>
+                </pre>
+            </article>
+            <article>
+                <h3>Loading a page</h3>
+                <p>
+                  The page loader can be processed with
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event">DOMContentLoaded</a>
+                    or
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event">load</a>.
+                </p>
+                <pre>
+                    <code class="javascript" data-title="The DOMContentLoaded event runs when the DOM is ready to use. (without waiting for external resources)">
+                        <![CDATA[
+                            window.addEventListener('DOMContentLoaded', function loaded (event) {
+                                window.removeEventListener('DOMContentLoaded', loaded, false)
+
+                                // Code to execute
+                            }, false)
+                        ]]>
+                    </code>
+                </pre>
+                <pre>
+                    <code class="javascript" data-title="The load event runs when the DOM is ready for use and all external resources are loaded.">
+                        <![CDATA[
+                            window.addEventListener('load', function load (event) {
+                                window.removeEventListener('load', load, false)
+
+                                // Code to execute
+                            }, false)
+                        ]]>
+                    </code>
+                </pre>
+            </article>
+            <article>
+                <h3>Drag and Drop</h3>
+                <p>Drag and drop often simplifies ergonomics but complicates implementation.</p>
+                <p>Operations needed for drag and drop:</p>
+                <ul>
+                    <li>Detecting the user interaction on an element that can be moved.</li>
+                    <li>Represent the state of the operation.</li>
+                    <li>Detect the end of the user interaction.</li>
+                    <li>Remove the element from the original container and insert it into the destination container.</li>
+                </ul>
+              <p>
+                Before HTML5, drag and drop was treated with the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/mousedown_event">
+                  <code>mousedown</code>
+                </a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/mousemove_event">
+                  <code>mousemove</code>
+                </a>, and <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseup_event">
+                  <code>mouseup</code> events.
+                </a> <a href="https://javascript.info/mouse-drag-and-drop">(full example)</a>
+              </p>
+
+              <p> With HTML5, the new event implementation 
+              <a href="https://developer.mozilla.org/en-US/docs/Web/API/DragEvent"><code>DragEvent</code></a>
+              offers several events specific to drag and drop. (<a href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API">Full example</a>)</p>
+            </article>
+            <article>
+                <h2>Event Delegation</h2>
+                <p>
+                  <a href="https://javascript.info/event-delegation">Event Delegation</a> is a method that simplifies adding and removing listeners.
+                </p>
+                <p>Adding a listener on a container only intercepts all children's events.</p>
+            </article>
+        </section>
+        <section>
+            <h1>Exceptional Handling</h1>
+            <p>
+              JavaScript interpreters produce an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors">error message</a> in the console in the case of an exception.
+            </p>
+            <article>
+                <h2>Exception Types</h2>
+                <p>
+                  <a href="https://www.tutorialspoint.com/javascript/javascript_error_handling.htm">JavaScript exceptions</a> can be classified into four categories.
+                </p>
+                <ul>
+                    <li>Syntax error: this is the simplest type to fix and detected with tools like ESLint.</li>
+                    <li>Runtime Error: The syntax is valid but misused. Normally detected by tools like ESLint.</li>
+                    <li>Logical or application error: The main challenge behind programming... No tools can detect this type of error.</li>
+                    <li>Possible and known error: The code foresees and deals with the exceptional case.</li>
+                </ul>
+                <p>Unlike compiled languages, JavaScript is interpreted.</p>
+                <p>The browser uses the source code directly.</p>
+                <pre>
+                    <code class="html" data-title="Example to demonstrate the scope of exceptions">
+                        <![CDATA[
+                    <body>
+                        <script>
+                            hello
+
+                            console.log('test1')
+                        </script>
+
+                        <script>
+                            console.log('test2')
+                        </script>
+
+                        <script>
+                            function generateError() {
+                                hello
+                            }
+
+                            console.log('test3')
+                        </script>
+                    </body>
+                ]]>
+                    </code>
+                </pre>
+            </article>
+            <article>
+                <h2>Possible and known error</h2>
+                <p>
+                  <a href="https://en.wikipedia.org/wiki/Defensive_programming">Defensive programming</a> is an approach of predicting the worst.
+                </p>
+                <p>In a closed system without input and output, the result will be constant and reliable.</p>
+                <p>
+                  In reality, a system always has inputs and outputs so the result will never be constant and reliable.
+                </p>
+                <ul>
+                    <li>A user enters data.</li>
+                    <li>A file on the hard drive is accessed.</li>
+                    <li>A connection is created to access a resource.</li>
+                    <li>...</li>
+                </ul>
+                <p>General instructions for dealing with exceptions: </p>
+                <ul>
+                    <li>
+                        Information from an external system <strong>MUST</strong> always be validated before being used.
+                    </li>
+                    <li>
+                      Accessing an external resource <strong>MUST</strong> always be able to handle the resource being unavailability or invalid.
+                    </li>
+                    <li>
+                      Exceptional handling <strong>MUST</strong> be part of analysis and be considered from the very beginning.
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h2>try catch finally</h2>
+                <p>
+                  The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch">
+                  <code>try catch finally</code>
+                </a> structure allows for encapsulation of segments of code to catch any exceptions that might occur.
+                </p>
+                <pre>
+                    <code class="javascript" data-title="Example of using the try catch finally structure.">
+                        <![CDATA[
+                    try {
+                        // Always executed
+                    } catch (error) {
+                        // Executed in the case of an error
+                    } finally {
+                        // Always executed
+                    }
+                ]]>
+                    </code>
+                </pre>
+                <p>
+                  The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw">
+                  <code>throw</code>
+                </a> function stops execution of a block of code, with the ability of specifying a reason.
+                </p>
+                <p>
+                  The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">
+                    <code>Error</code>
+                  </a> object represents an error thrown by the interpreter in case of an exception.
+                </p>
+                <p>Some extensions of the Error object are available to further clarify an error and to create new implementations.</p>
+            </article>
+            <article>
+                <h2>onerror</h2>
+                <p>
+                  The <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventSource/onerror">
+                  <code>onerror</code>
+                </a> event can be declared globally on the <code>window</code> object or used like an attribute on some tags.
+                </p>
+                <pre>
+                    <code class="html" data-title="Example of using the onerror event.">
+                        <![CDATA[
+                            <!DOCTYPE html>
+                            <html lang="en">
+
+                            <head>
+                                <meta charset="UTF-8">
+                                <title>Document</title>
+                                <script>
+                                    // Intercept only JavaScript errors
+                                    window.onerror = function (message, url, lineNumber) {
+                                        console.log(message, url, lineNumber)
+                                    }
+                                </script>
+                            </head>
+
+                            <body>
+                                <script>
+                                    const test = 'hello'
+                                    test.methodThatDosntExist()
+                                </script>
+
+                                <img src="myimage.gif" onerror="alert('An error occurred loading the image.')" alt="" />
+                            </body>
+
+                            </html>
+                        ]]>
+                    </code>
+                </pre>
+            </article>
+        </section>
+        <section>
+            <h1>jQuery</h1>
+            <p>
+              DOM is complex to manipulate and for a long time the implementation was not standard between the browsers.
+            </p>
+            <p>
+              The <a href="https://jquery.com/">jQuery</a> library offers a simple API which is standard for all browsers.
+            </p>
+            <p>For several years, browsers have standardized their implementation and Microsoft is no longer trying to create a new implementation.</p>
+            <p>Below are a few documents to help you determine if jQuery is necessary for your project:</p>
+            <ul>
+                <li>
+                    <a href="http://youmightnotneedjquery.com/">You might not need jQuery</a>
+                </li>
+                <li>
+                    <a href="https://www.sitepoint.com/guide-vanilla-ajax-without-jquery/">A Guide to Vanilla Ajax Without jQuery</a>
+                </li>
+                <li>
+                    <a href="https://blog.garstasio.com/you-dont-need-jquery/ajax/">You Don't Need jQuery!</a>
+                </li>
+            </ul>
+            <article>
+                <h2>jQuery API</h2>
+                <p>
+                  The <a href="https://api.jquery.com/">jQuery API</a> provides a complete base for manipulating the DOM.
+                </p>
+                <p>
+                  Other projects like <a href="https://api.jqueryui.com/">api.jqueryui.com</a> for creating interfaces or <a href="https://api.jquerymobile.com/">api.jquerymobile.com</a> for developing mobile interfaces.
+              </p>
+                <p>
+                  The functions can be broken down into 2 categories:
+                  <a href="https://learn.jquery.com/using-jquery-core/dollar-object-vs-function/">$ vs $()</a>
+                </p>
+                <pre>
+                    <code class="javascript" data-title="Namespace jQuery">
+                        <![CDATA[
+                            // the jQuery object (namespace)
+                            $
+                            jQuery
+
+                            // selector method
+                            $()
+                            jQuery()
+
+                            // utility-type method
+                            $.
+                            jQuery.
+                        ]]>
+                    </code>
+                </pre>
+                <p>
+                  Selection type methods return <code>this</code> which allows a chained method syntax.
+                </p>
+                <p>Utility type methods return different results...</p>
+            </article>
+            <article>
+                <h3>Selection</h3>
+                <p>
+                  The <a href="http://api.jquery.com/category/selectors/">jQuery selector methods</a> allow for the use of the majority of CSS3 selectors and others specific to jQuery.
+                </p>
+                <pre>
+                    <code class="javascript" data-title="Selection jQuery" data-subtitle="Selecting an element with the .container class">
+                        <![CDATA[
+                            // The .html() function returns the text content of the selected tag
+                            const content = $('.container').html()
+
+                            // The .html() function can also specify the contents of the tag
+                            $('.container').html('New content inserted in the tag')
+                        ]]>
+                    </code>
+                </pre>
+
+                <p>WARNING: Since the jQuery implementation was available before specification, there are several differences in syntax.</p>
+                <ul>
+                    <li>
+                        CSS3 Selectors
+                        <ul>
+                            <li><a href="https://www.w3schools.com/cssref/css_selectors.asp">CSS Selector Reference (w3schools)</a></li>
+                            <li><a href="https://www.w3schools.com/cssref/trysel.asp">CSS Selector Tester (w3schools)</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        jQuery Selectors
+                        <ul>
+                            <li><a href="https://www.w3schools.com/jquery/jquery_selectors.asp">jQuery Selectors (w3schools)</a></li>
+                            <li><a href="https://www.w3schools.com/jquery/trysel.asp">jQuery Selector Tester (w3schools)</a></li>
+                            <li><a href="https://www.hongkiat.com/blog/jquery-selectors/">Introduction To jQuery Selectors</a></li>
+                            <li><a href="https://code.tutsplus.com/tutorials/uncommon-jquery-selectors--cms-25812">Uncommon jQuery Selectors</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <p>With selectors, the DOM can be traversed using <a href="https://api.jquery.com/category/traversing/tree-traversal/">tree-traversal</a> methods.</p>
+                <ul>
+                    <li><a href="https://api.jquery.com/children/"><code>.children()</code></a></li>
+                    <li><a href="https://api.jquery.com/find/"><code>.find()</code></a></li>
+                    <li>...</li>
+                </ul>
+
+                <p>With <a href="https://api.jquery.com/category/traversing/filtering/">jQuery filtering methods</a> it is possible to filter the results returned by selectors.</p>
+                <ul>
+                    <li><a href="https://api.jquery.com/eq/"><code>.eq()</code></a></li>
+                    <li><a href="http://api.jquery.com/Filter/"><code>.filter()</code></a></li>
+                    <li>...</li>
+                </ul>
+
+                <pre>
+                    <code class="javascript" data-title="Method Chaining" data-subtitle="With jQuery, you can chain together actions/methods.">
+                        <![CDATA[
+                            // The .prop() method accesses the property of the object
+                            const elementName = $('.container').parent().prop('tagName')
+
+                            // For some properties that are dynamic, even if an attribute exists on the element, use .prop()
+                            $('input').prop('disabled', false);
+
+                            // The .attr() method accesses the attributes of the HTML element
+                            const language = $('html').attr('lang')
+
+                            $('html').attr('lang', 'es')
+
+                            // The .val() method returns the value of the tag's value property
+                            const inputValue = $('input.userName').val()
+
+                            $('input.userName').val('New value for the value attribute')
+
+                            // The .css() method accesses the style of the tag
+                            const color = $('body').css('background-color')
+
+                            $('body').css('background-color', 'red')
+                        ]]>
+                    </code>
+                </pre>
+              <p>Reference documentation for <a href="https://api.jquery.com/category/manipulation/">accessing and modifying</a> the DOM with jQuery</p>
+                <ul>
+                    <li>
+                        <a href="https://api.jquery.com/prop/#entry-longdesc">
+                            <code>.prop()</code>
+                        </a> See the distinction between attribute and property
+                    </li>
+                    <li>
+                        <a href="https://api.jquery.com/attr/#attr-attributeName">
+                            <code>.attr()</code>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://api.jquery.com/val/#val">
+                            <code>.val()</code>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://api.jquery.com/css/#css-propertyName">
+                            <code>.css()</code>
+                        </a>
+                    </li>
+                    <li><a href="https://api.jquery.com/addClass/"><code>.addClass()</code></a></li>
+                    <li><a href="https://api.jquery.com/removeClass/"><code>.removeClass()</code></a></li>
+                    <li>...</li>
+                </ul>
+
+                <p>
+                  Reference documentation for <a href="http://api.jquery.com/category/effects/">graphic effects with jQuery.</a>
+                </p>
+                <ul>
+                    <li><a href="http://api.jquery.com/show/"><code>.show()</code></a></li>
+                    <li><a href="http://api.jquery.com/hide/"><code>.hide()</code></a></li>
+                    <li><a href="http://api.jquery.com/toggle/"><code>.toggle()</code></a></li>
+                    <li>...</li>
+                </ul>
+
+                <p>
+                  Reference documentation for <a href="http://api.jquery.com/category/dimensions/">dimension processing</a> with jQuery.</p>
+            </article>
+            <article>
+                <h3>Utilities</h3>
+                <p>
+                  <a href="http://api.jquery.com/category/utilities/">jQuery's utilities</a> functions solves many moddern needs.</p>
+                <p>
+                  In some cases, the function exist natively in browsers. (
+                  <a href="http://api.jquery.com/jQuery.trim/">
+                        <code>$.trim()</code>
+                    </a>
+                    ,
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim">
+                        <code>.trim()</code>
+                    </a>
+                    )
+                </p>
+                <p>
+                  Or the functions are now natively feasible in browsers with a different syntax. (
+                  <a href="http://youmightnotneedjquery.com/">youmightnotneedjquery.com</a>
+                    )
+                </p>
+            </article>
+
+            <article>
+                <h2>jQuery Events</h2>
+                <p>
+                  <a href="http://api.jquery.com/category/events/">Event management with jQuery</a>
+                  is the most popular way to support Internet Explorer before version 9.
+                </p>
+                <p>
+                    <a href="https://learn.jquery.com/events/">jQuery Event Tutorial</a>
+                </p>
+            </article>
+            <article>
+                <h3>Loading a page</h3>
+                <p>
+                  <a href="https://learn.jquery.com/using-jquery-core/document-ready/"><code>$(document).ready()</code></a>
+                  or the equivalent short syntax <a href="https://learn.jquery.com/using-jquery-core/document-ready/"><code>$(function() {  })</code></a>
+                  is equivalent to the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event">DOMContentLoaded</a> event available in recent browsers.
+                </p>
+            </article>
+        </section>
+        <section>
+            <h1>Object function</h1>
+            <p>
+              <a href="https://en.wikipedia.org/wiki/Object-oriented_programming">Object-oriented programming object (OOP)</a> modeling allows the encapsulation of properties and methods.
+            </p>
+            <p>Proper encapsulation allows better scope management and facilitates understanding and maintenance of code.</p>
+            <article>
+                <h2>Object Literals</h2>
+                <p>Declaration and object initialization with literal notation.</p>
+                <pre>
+                    <code class="javascript" data-title="Example of object creation with literal notation.">
+                        <![CDATA[
+                            'use strict'
+
+                            const myObject = {
+                                prop1: 'val1',
+                                prop2: 'val2'
+                            }
+
+                            console.log(myObject)
+                            // { prop1: 'val1', prop2: 'val2' }
+
+                            console.log(myObject.prop1)
+                            // val1
+
+                            console.log(myObject['prop1'])
+                            // val1
+                        ]]>
+                    </code>
+                </pre>
+            </article>
+
+            <article>
+                <h3>JSON</h3>
+                <p>
+                <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON">JSON (JavaScript Object Notation)</a> is a text-based format for representing structured data.</p>
+                <p>The syntax is used directly with JavaScript and is also used with other languages.</p>
+                <p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON"><code>JSON</code></a>  object offers methods for serialization and conversion.</p>
+                <ul>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse"><code>JSON.parse()</code></a></li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify"><code>JSON.stringify()</code></a></li>
+                </ul>
+            </article>
+
+            <article>
+                <h2>Factory Functions</h2>
+                <p>
+                  If the creation of the object requires special treatment, the <a href="https://en.wikipedia.org/wiki/Factory_method_pattern">Factory design pattern</a> can encapsulate the necessary logic.
+                </p>
+                <pre>
+                    <code class="javascript" data-title="Example of object creation using a simple factory.">
+                        <![CDATA[
+                            'use strict'
+
+                            function createMyObject () {
+                                return {
+                                    prop1: 'val1',
+                                    prop2: 'val2'
+                                }
+                            }
+
+                            const myObject = createMyObject()
+
+                            console.log(myObject)
+                        ]]>
+                    </code>
+                </pre>
+                <pre>
+                    <code class="javascript" data-title="Example of object creation using a simple factory." data-subtitle="The privateProp property will be accessible only by the object.">
+                        <![CDATA[
+                            'use strict'
+
+                            function createMyObject () {
+                                const privateProp = 10 / 2
+
+                                return {
+                                    prop1: 'val1',
+                                    prop2: 'val2 = ' + privateProp
+                                }
+                            }
+
+                            const myObject = createMyObject()
+
+                            console.log(myObject)
+                            // { prop1: 'val1', prop2: 'val2 = 5' }
+                        ]]>
+                    </code>
+                </pre>
+            </article>
+            <article>
+                <h2>Constructor Functions</h2>
+                <p>
+                  All JavaScript objects are 
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"><code>Object</code></a>
+                  instances that represent the base of the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain">prototype chain</a>.
+                </p>
+                <p>
+                  All objects therefore have the 
+                  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype">prototype</a> property.
+                </p>
+                <pre>
+                    <code class="javascript" data-title="Inheritance and the prototype chain">
+                        <![CDATA[
+                            'use strict'
+
+                            function MyObject () {
+                                this.prop1 = 'val1'
+                                this.prop2 = 'val2'
+                            }
+
+                            console.log(MyObject)
+                            // [Function: MyObject]
+
+                            console.log(MyObject.prototype)
+                            // MyObject {}
+
+                            console.log(MyObject.prototype.constructor)
+                            // [Function: MyObject]
+
+                            // The function can not be executed
+                            // console.log(MyObject())
+                            // TypeError: Cannot set property 'prop1' of undefined
+
+                            const myObject = new MyObject()
+
+                            console.log(myObject)
+                            // MyObject { prop1: 'val1', prop2: 'val2' }
+
+                            console.log(Object.getPrototypeOf(myObject))
+                            // MyObject {}
+                        ]]>
+                    </code>
+                </pre>
+                <pre>
+                    <code class="javascript" data-title="Example of use of the constructor.">
+                        <![CDATA[
+                            'use strict'
+
+                            function MyObject (prop1, prop2) {
+                                let privateProp = 'Hey'
+
+                                this.prop1 = prop1
+                                this.prop2 = prop2
+
+                                this.myFunction = function (param) {
+                                    console.log(privateProp, param)
+                                }
+                            }
+
+                            const myObject = new MyObject('val1', 'val2')
+
+                            myObject.myFunction('Martin')
+                            // Hey Martin
+                        ]]>
+                    </code>
+                </pre>
+            </article>
+            <article>
+                <h2>Module</h2>
+                <p>
+                    The Self-Executing Anonymous Function, or
+                    <a href="https://developer.mozilla.org/en-US/docs/Glossary/IIFE">Immediately Invoked Function Expression (IIFE)</a>
+                    function is a JavaScript function that runs as soon as it is defined.
+                </p>
+                <p>The self-instantiated anonymous function then creates a scope that encapsulates all the code to avoid conflicts.</p>
+                <pre>
+                    <code class="javascript" data-title="Immediately Invoked Function Expression (IIFE)">
+                        <![CDATA[
+                            (function () {
+                                'use strict'
+
+                                // Isolated Execution!
+                            })()
+                        ]]>
+                    </code>
+                </pre>
+                <pre>
+                    <code class="javascript" data-title="Export the module into a variable.">
+                        <![CDATA[
+                            const myModule = (function () {
+                                'use strict'
+
+                                const privateProp = 'Hey'
+
+                                function privateMethod (param) {
+                                    return privateProp + ' ' + param
+                                }
+
+                                return {
+                                    publicMethod: function (param) {
+                                        return privateMethod(param)
+                                    }
+                                }
+                            })()
+
+                            console.log(myModule.publicMethod('Martin'))
+                            // Hey Martin
+                        ]]>
+                    </code>
+                </pre>
+            </article>
+        </section>
+        <section>
+            <h1>Objet class</h1>
+            <p>From the ES6 version a simpler syntax comparable to Java is available.</p>
+            <p>
+                The use of a
+                <a href="https://en.wikipedia.org/wiki/Source-to-source_compiler">source-to-source compiler or transpiler</a>
+                like
+                <a href="https://babeljs.io/">Babel</a>
+                is necessary for archaic web browsers.
+            </p>
+            <article>
+                <h2>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/class">
+                        <code>class</code>
+                    </a>
+                    ,
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor">
+                        <code>constructor</code>
+                    </a>
+                </h2>
+                <p>Only one constructor can exist per class.</p>
+                <p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super">super</a> keyword can be used to access and call functions on an object's parent.</p>
+                <p>The super keyword cannot be used in conjunction with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">arrow functions</a>.</p>
+                <div class="row">
+                    <div class="col">
+                        <pre>
+                            <code class="javascript" data-title="ES5">
+                                <![CDATA[
+                            function Person(name) {
+                                this.name = name;
+                                this.greet = function() {
+                                    console.log("Hello, I'm " + this.name);
+                                }
+                            }
+                        ]]>
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="col">
+                        <pre>
+                            <code class="javascript" data-title="ES6">
+                                <![CDATA[
+                            class Person {
+                                constructor(name) {
+                                    this.name = name;
+                                }
+                                greet() {
+                                    console.log("Hello, I'm " + this.name);
+                                }
+                            }
+                        ]]>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <h2>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends">
+                        <code>extends</code>
+                    </a>
+                </h2>
+                <p>The <code>extends</code> keyword allows for the declaration of a class with inheritance.</p>
+                <p>
+                    <a href="https://javascript.info/class-inheritance">Simple inheritance example in ES6</a>
+                </p>
+                <pre>
+                    <code class="javascript" data-title="Simple inheritance example without redefining the constructor of the parent class.">
+                        <![CDATA[
+                            class Animal {
+
+                                constructor(name) {
+                                    this.speed = 0;
+                                    this.name = name;
+                                }
+
+                                run(speed) {
+                                    this.speed += speed;
+                                    alert(`${this.name} runs with speed ${this.speed}.`);
+                                }
+
+                                stop() {
+                                    this.speed = 0;
+                                    alert(`${this.name} stopped.`);
+                                }
+                            }
+
+                            class Rabbit extends Animal {
+                                hide() {
+                                    alert(`${this.name} hides!`);
+                                }
+                            }
+                        ]]>
+                    </code>
+                </pre>
+            </article>
+            <article>
+                <h2>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static">
+                        <code>static</code>
+                    </a>
+                </h2>
+                <p>A <code>static</code> method can be used without creating an instance of the class.</p>
+                <pre>
+                    <code class="javascript" data-title="Example of declaring a static method.">
+                        <![CDATA[
+                            'use strict'
+
+                            class Person {
+                                static methodStatic () {
+                                    return 'test-methode'
+                                }
+                            }
+
+                            console.log(Person.methodStatic())
+                        ]]>
+                    </code>
+                </pre>
+                <p>
+                  <a href="https://javascript.info/static-properties-methods">JavaScript lacks support for static properties.</a>
+                </p>
+                <p>The use of the ES5 method is recommended. (do not use getter and setter)</p>
+                <pre>
+                    <code class="javascript" data-title="Example of declaring a static property with ES5">
+                        <![CDATA[
+                            'use strict'
+
+                            class Person {
+                            }
+
+                            // A static property
+                            Person.propStatic = 'test-prop'
+
+                            console.log(Person.propStatic)
+                        ]]>
+                    </code>
+                </pre>
+            </article>
+        </section>
+        <section>
+            <h1>Practical Work</h1>
+        </section>
+        <section>
+            <h1>Practical Work</h1>
+        </section>
+        <section>
+            <h1>Practical Work</h1>
+        </section>
+        <section>
+            <h1>Practical Exam</h1>
+        </section>
+        <section>
+            <h1>Examination and Presentation</h1>
+        </section>
+        <section>
+            <h1>Reference</h1>
+            <article>
+                <h2>Documentation</h2>
+                <ul>
+                    <li>
+                        <a href="https://javascript.info/">The Modern JavaScript Tutorial</a>
+                    </li>
+                    <li>
+                        <a href="https://www.tutorialspoint.com/javascript/index.htm">www.tutorialspoint.com/javascript</a>
+                    </li>
+                    <li>
+                        <a href="https://www.madetech.com/blog/11-developers-who-said-it-best">11 developers who said it best</a>
+                    </li>
+                    <li>
+                        <a href="http://www.lingoes.net/en/translator/langcode.htm">ISO language code</a>
+                    </li>
+                    <li>
+                        <a href="https://learn.jquery.com/">learn.jquery.com</a>
+                    </li>
+                    <li>
+                        <a href="https://devdocs.io/">devdocs.io</a>
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h2>Tools</h2>
+                <ul>
+                    <li></li>
+                </ul>
+            </article>
+            <article>
+                <h2>Tutorial</h2>
+                <ul>
+                    <li>
+                        <a href="http://www.barelyfitz.com/screencast/html-training/css/positioning/">Learn CSS Positioning in Ten Steps</a>
+                    </li>
+                    <li>
+                        <a href="https://buzut.net/programmation-fonctionnelle-en-javascript/">Functional programming in JavaScript</a>
+                    </li>
+                    <li>
+                        <a href="https://bitsofco.de/for-in-vs-for-of/">for in et for of</a>
+                    </li>
+                    <li>
+                        <a href="https://medium.freecodecamp.org/prototype-in-js-busted-5547ec68872">Prototype</a>
+                    </li>
+                    <li>
+                        <a href="https://codeburst.io/object-oriented-programming-in-javascript-51b2bdfdfe9f">Object Oriented Programming in JavaScript</a>
+                    </li>
+                    <li>
+                        <a href="https://codeburst.io/javascript-object-oriented-programming-using-es6-3cd2ac7fbbd8">Object Oriented Programming using ES6</a>
+                    </li>
+                    <li>
+                        <a href="https://coryrylan.com/blog/javascript-module-pattern-basics">JavaScriptJavaScript Module Pattern Basics</a>
+                    </li>
+                    <li>
+                        <a href="https://blog.mgechev.com/2012/08/29/self-invoking-functions-in-javascript-or-immediately-invoked-function-expression/">Self-invoking functions in JavaScript (or Immediately Invoked Function Expressions)</a>
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h2>Bonne pratique</h2>
+                <ul>
+                    <li>
+                        <a href="https://javascript.info/ninja-code">List of things not to do (javascript.info/ninja-code)</a>
+                    </li>
+                </ul>
+            </article>
+        </section>
+    </body>
+</html>
